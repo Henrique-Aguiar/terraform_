@@ -1,0 +1,4 @@
+terraform import aws_s3_bucket.dves_cloud dves.cloud
+terraform import aws_s3_bucket_policy.dves_cloud dves.cloud
+terraform import aws_s3_bucket_website_configuration.dves_cloud dves.cloud
+terraform import aws_s3_bucket_object.dves_cloud dves.cloud
