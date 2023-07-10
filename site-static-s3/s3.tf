@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "dves_cloud" {
-
   bucket = "dves.cloud"
+  force_destroy = true
 
   tags = {
 
@@ -14,16 +14,18 @@ resource "aws_s3_bucket" "dves_cloud" {
 
 resource "aws_s3_bucket_policy" "dves_cloud" {
   bucket = aws_s3_bucket.dves_cloud.id
-  policy = file("${path.module}/policies/dves-cloud.json")
+  policy = templatefile("${path.module}/policies/dves-cloud.json",{
+    aws_source_arn = aws_cloudfront_distribution.dves_cloud_EAKKAIXXBA9BF.arn 
+  })
 }
 
-resource "aws_s3_bucket_website_configuration" "dves_cloud" {
-  bucket = aws_s3_bucket.dves_cloud.id
+# resource "aws_s3_bucket_website_configuration" "dves_cloud" {
+#   bucket = aws_s3_bucket.dves_cloud.id
 
-  index_document {
-    suffix = "index.html"
-  }
-}
+#   index_document {
+#     suffix = "index.html"
+#   }
+# }
 
 #resource "aws_s3_object" "dves_cloud" {
 #  for_each = fileset("doctorcare/", "*")
@@ -42,11 +44,11 @@ resource "aws_s3_bucket_website_configuration" "dves_cloud" {
 #}
 
 resource "aws_s3_bucket_public_access_block" "dves_cloud" {
-  bucket                  = aws_s3_bucket.dves_cloud.id
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  bucket = aws_s3_bucket.dves_cloud.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "null_resource" "s3_upload" {
@@ -55,6 +57,6 @@ resource "null_resource" "s3_upload" {
   }
 
   provisioner "local-exec" {
-    command = "aws s3 cp --recursive doctorcare/ s3://${aws_s3_bucket.dves_cloud.bucket}"
+    command = "aws s3 cp --recursive doctorcare/ s3://${aws_s3_bucket.dves_cloud.bucket}" 
   }
 }
