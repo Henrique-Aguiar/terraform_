@@ -7,9 +7,9 @@ resource "aws_route53_record" "dves_cloud" {
   name    = "dves.cloud"
   type    = "A"
   alias {
-    evaluate_target_health = true
-    name                   = aws_s3_bucket_website_configuration.dves_cloud.website_domain
-    zone_id                = aws_s3_bucket.dves_cloud.hosted_zone_id
+    evaluate_target_health = false
+    name                   = aws_cloudfront_distribution.dves_cloud_EAKKAIXXBA9BF.domain_name
+    zone_id                = aws_cloudfront_distribution.dves_cloud_EAKKAIXXBA9BF.hosted_zone_id
   }
 }
 

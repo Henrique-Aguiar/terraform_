@@ -1,4 +1,10 @@
 terraform import aws_s3_bucket.dves_cloud dves.cloud
 terraform import aws_s3_bucket_policy.dves_cloud dves.cloud
 terraform import aws_s3_bucket_website_configuration.dves_cloud dves.cloud
-terraform import aws_s3_bucket_object.dves_cloud dves.cloud
+terraform import aws_s3_bucket_acl.dves_cloud dves.cloud
+terraform import aws_route53_zone.dves_cloud Z05706111QO8FQ09HY9PR
+terraform import aws_route53_record.dves_cloud Z05706111QO8FQ09HY9PR_dves.cloud_A
+
+terraform import aws_cloudfront_distribution.dves_cloud_EAKKAIXXBA9BF EAKKAIXXBA9BF
+
+terraform import aws_cloudfront_origin_access_control.dves_cloud_EAKKAIXXBA9BF E2VJYH962P6LET
