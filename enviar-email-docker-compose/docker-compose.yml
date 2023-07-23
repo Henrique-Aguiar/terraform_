@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  web:
+    build: 
+      context: frontend/
+      args:
+        API_ADDRESS: "http://api.dves.cloud/enviar-email"
+    ports:
+      - "3000:80"
+    restart: always
+    #environment:
+     # API_ADDRESS: "http://api.dves.cloud/enviar-email"
+  
+  api:
+    build: backend/
+    command: npm start
+    ports:
+      - "80:80"
+    networks:
+      default:
+        aliases:
+          - api.dves.cloud
+    restart: always
+    environment:
+      PORT: 80
+      SMTP_HOST: "smtp.office365.com"
+      SMTP_PORT: 587
+      SMTP_USER: "hrikelr@hotmail.com"
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      EMAIL_DESTINATION: ${EMAIL_DESTINATION}
+  
+  db:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_1
+      MYSQL_USER: henrique
+      MYSQL_PASSWORD: root
+    volumes:
+      - /home/henrique/Desktop/terraform_/enviar-email-docker-compose/mysql:/var/lib/mysql
+# volumes:
+#   db-mysql:
