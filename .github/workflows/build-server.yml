@@ -1,0 +1,25 @@
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get modified files
+        id: git-status
+        run: echo "::set-output name=modified::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})"
+
+      - name: Docker Build
+        if: ${{ contains(steps.git-status.outputs.modified, 'Dockerfile') }}
+        run: docker build -t henriquelr/dves_api .
