@@ -1,0 +1,24 @@
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - main 
+    paths:
+      - 'aws-rds/backend/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'aws-rds/backend/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Docker Build
+        run: docker build -t henriquelr/dves_api .
