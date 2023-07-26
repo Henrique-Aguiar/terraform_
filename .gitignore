@@ -1,5 +1,8 @@
 *.dll
 *.exe
+.env
+mysql/
+.local*
 .DS_Store
 example.tf
 terraform.tfplan
