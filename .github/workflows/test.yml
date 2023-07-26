@@ -7,5 +7,5 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      name: status push
+    - name: status push
       run: echo "susses"
