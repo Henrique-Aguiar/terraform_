@@ -4,11 +4,11 @@ on:
   push:
     paths:
       - 'aws-rds/backend/**'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'aws-rds/backend/**'
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'aws-rds/backend/**'
 
 jobs:
   docker:
