@@ -3,12 +3,12 @@ name: ci
 on:
   push:
     paths:
-      - 'terraform_/aws-rds/backend/**'
+      - 'aws-rds/backend/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'terraform_/aws-rds/backend/**'
+      - 'aws-rds/backend/**'
 
 jobs:
   docker:
