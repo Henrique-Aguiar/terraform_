@@ -33,5 +33,5 @@ jobs:
         with:
           file: 'aws-rds/backend/Dockerfile'
           push: true
-          tags: henriquelr/dves_api:latest,henriquelr/dves_api:${{ github.sha::8 }}
+          tags: henriquelr/dves_api:latest,henriquelr/dves_api:${{ GITHUB_SHA::8 }}
   
