@@ -23,4 +23,3 @@ async function insertCustomer(text){
 }
 
 module.exports = {insertCustomer}
-// module.exports = connect

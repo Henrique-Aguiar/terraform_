@@ -29,5 +29,5 @@ jobs:
         with:
           file: 'aws-rds/backend/Dockerfile'
           push: true
-          tags: henriquelr/dves_api:latest
+          tags: henriquelr/dves_api:latest,henriquelr/dves_api:002
   
