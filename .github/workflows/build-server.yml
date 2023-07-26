@@ -5,12 +5,12 @@ on:
     branches:
       - 'main'
     paths:
-      - 'aws-rds/backend/**'
+      - 'terraform_/aws-rds/backend/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'aws-rds/backend/**'
+      - 'terraform_/aws-rds/backend/**'
 
 jobs:
   docker:
