@@ -20,8 +20,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t henriquelr/dves_api:latest aws-rds/backend/Dockerfile
-          docker build -t henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/backend/Dockerfile
+          docker build -t henriquelr/dves_api:latest aws-rds/backend/
+          docker build -t henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/backend/
       
       - name: Set short SHA
         id: set_short_sha
