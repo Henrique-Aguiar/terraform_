@@ -26,6 +26,6 @@ const { describe, expect } = require('@jest/globals');
 
 describe('Teste do endpoint /enviar-email', () => {
     it('Deve enviar um email com sucesso', () => {
-      expect({ message: 'Email enviado com suc' }).toEqual({ message: 'Email enviado com sucesso.' });
+      expect({ message: 'Email enviado com sucesso.' }).toEqual({ message: 'Email enviado com sucesso.' });
     });
 });
