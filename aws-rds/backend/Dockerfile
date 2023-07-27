@@ -7,7 +7,7 @@ COPY package.json ./
 
 RUN npm install
 
-COPY aws-rds/backend/ .
+COPY . .
 
 ## Container ficará ouvindo os acessos na porta 3000
 EXPOSE 3000
