@@ -48,6 +48,7 @@ jobs:
         run: |
           docker build --tag henriquelr/dves_api:latest aws-rds/backend/
           docker build --tag henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/backend/
+
       # - name: Push Docker image
       #   run: |
       #     docker push henriquelr/dves_api:latest
