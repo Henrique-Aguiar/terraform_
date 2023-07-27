@@ -1,0 +1,19 @@
+name: Tests and build
+
+on: 
+  push:
+    branches:    
+      - main
+    pull_request:
+    paths:
+      - 'aws-rds/backend/**'
+
+jobs:
+  build:
+    if: github.event_name == 'pull_request'
+    uses: ./.github/workflows/build-and-push-docker-image.yml
+  
+  merge:
+    if: github.event_name == 'push'
+    uses: ./.github/workflows/merge-main.yml
+

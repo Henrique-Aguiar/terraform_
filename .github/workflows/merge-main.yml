@@ -1,11 +1,13 @@
 name: merge main
 
-on: 
-  push:
-    branches:    
-      - main
-    paths:
-      - 'aws-rds/backend/**'
+# on: 
+#   push:
+#     branches:    
+#       - main
+#     paths:
+#       - 'aws-rds/backend/**'
+on:
+  workflow_call:
 
 jobs:
   test:

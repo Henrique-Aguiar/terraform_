@@ -1,11 +1,13 @@
-name: Build and Push Docker Image
+name: Build Docker Image
 
-on: 
-  pull_request:
-    branches:
-      - teste
-    paths:
-      - 'aws-rds/backend/**'
+# on: 
+#   pull_request:
+#     branches:
+#       - main
+#     paths:
+#       - 'aws-rds/backend/**'
+on:
+  workflow_call:
 
 jobs:
   test:
