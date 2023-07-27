@@ -23,15 +23,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # - 
-      #   name: Get Hash
-      #   id: hash
-      #   run: git_hash=$(git rev-parse --short "$GITHUB_SHA")
+      -
+        name: Set short SHA
+        id: set_short_sha
+        run: echo "SHORT_SHA=${GITHUB_SHA::8}" >> $GITHUB_ENV
       -
         name: Build and push
         uses: docker/build-push-action@v4
         with:
           file: 'aws-rds/backend/Dockerfile'
           push: true
-          tags: henriquelr/dves_api:latest,henriquelr/dves_api:${GITHUB_SHA::8}
+          tags: henriquelr/dves_api:latest,henriquelr/dves_api:${{ env.SHORT_SHA }}
   
