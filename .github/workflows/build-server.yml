@@ -26,7 +26,7 @@ jobs:
       -
         name: Set short SHA
         id: set_short_sha
-        run: echo "SHORT_SHA=${GITHUB_SHA::8}" >> $GITHUB_ENV
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
       -
         name: Build and push
         uses: docker/build-push-action@v4
