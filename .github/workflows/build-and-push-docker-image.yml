@@ -2,8 +2,8 @@ name: Build and Push Docker Image
 
 on: 
   pull_request:
-    branches-ignore:
-      - 'main'
+    branches:
+      - teste
     paths:
       - 'aws-rds/backend/**'
 
