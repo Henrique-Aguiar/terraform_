@@ -11,9 +11,9 @@ on:
 jobs:
   build:
     if: github.event_name == 'pull_request'
-    uses: .github/workflows/build-and-push-docker-image.yml
+    uses: ./.github/workflows/build-and-push-docker-image.yml
   
   merge:
     if: github.event_name == 'push'
-    uses: .github/workflows/merge-main.yml
+    uses: ./.github/workflows/merge-main.yml
 

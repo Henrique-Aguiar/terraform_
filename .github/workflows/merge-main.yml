@@ -6,6 +6,8 @@ name: merge main
 #       - main
 #     paths:
 #       - 'aws-rds/backend/**'
+on:
+  workflow_call:
 
 jobs:
   test:

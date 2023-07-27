@@ -6,6 +6,8 @@ name: Build Docker Image
 #       - main
 #     paths:
 #       - 'aws-rds/backend/**'
+on:
+  workflow_call:
 
 jobs:
   test:
