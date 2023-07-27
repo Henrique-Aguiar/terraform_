@@ -24,8 +24,8 @@ jobs:
       - name: Run test 
         run: npm test
         working-directory: ./aws-rds/backend
-
-  docker-build:
+  
+  docker-setup:
     needs: test
     runs-on: ubuntu-latest
     steps: 
@@ -42,13 +42,8 @@ jobs:
         id: set_short_sha
         run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
-      - name: Build Docker image
-        run: |
-          docker build --tag henriquelr/dves_api:latest aws-rds/backend/
-          docker build --tag henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/backend/
-
-  docker-push:
-    needs: [test, docker-build]
+  docker-build:
+    needs: [test, docker-setup]
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout code
@@ -60,13 +55,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
-      - name: Set short SHA
-        id: set_short_sha
-        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+      # - name: Set short SHA
+      #   id: set_short_sha
+      #   run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: |
+          docker build --tag henriquelr/dves_api:latest aws-rds/backend/
+          docker build --tag henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/backend/
 
       - name: Push Docker image
         run: |
           docker push henriquelr/dves_api:latest
           docker push henriquelr/dves_api:${{ env.SHORT_SHA }}
-  
-  
