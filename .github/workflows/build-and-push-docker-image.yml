@@ -26,6 +26,7 @@ jobs:
         working-directory: ./aws-rds/backend
 
   docker-build:
+    needs: test
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout code
@@ -47,6 +48,7 @@ jobs:
           docker build --tag henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/backend/
 
   docker-push:
+    needs: [test, docker-build]
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout code
