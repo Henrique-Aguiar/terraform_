@@ -3,7 +3,7 @@ FROM node:alpine
 
 WORKDIR /usr/app
 
-COPY aws-rds/backend/package.json ./
+COPY package.json ./
 
 RUN npm install
 
