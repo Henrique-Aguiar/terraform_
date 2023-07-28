@@ -24,15 +24,13 @@ jobs:
       # Check if backend directory was modified
       - name: Install dependencies and run test
         if: ${{ contains(github.event.paths, 'aws-rds/backend') }}
-        run: npm ci
-        run: npm test
+        run: npm ci && npm test
         working-directory: ./aws-rds/backend
       
       # Check if frontend directory was modified
       - name: Install dependencies and run test
         if: ${{ contains(github.event.paths, 'aws-rds/frontend') }}
-        run: npm ci
-        run: npm test
+        run: npm ci && npm test
         working-directory: ./aws-rds/frontend/front
 
   docker-build:
