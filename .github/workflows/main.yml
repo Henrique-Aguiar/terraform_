@@ -6,9 +6,11 @@ on:
       - main  
     paths:
       - 'aws-rds/backend/**'
+      - 'aws-rds/frontend/**'
   pull_request:
     paths:
       - 'aws-rds/backend/**'
+      - 'aws-rds/frontend/**'
 
 jobs:
   build:

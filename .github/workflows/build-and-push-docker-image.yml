@@ -21,13 +21,19 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Install dependencies
+      # Check if backend directory was modified
+      - name: Install dependencies and run test
+        if: ${{ contains(github.event.paths, 'aws-rds/backend') }}
         run: npm ci
-        working-directory: ./aws-rds/backend
-
-      - name: Run test 
         run: npm test
         working-directory: ./aws-rds/backend
+      
+      # Check if frontend directory was modified
+      - name: Install dependencies and run test
+        if: ${{ contains(github.event.paths, 'aws-rds/frontend') }}
+        run: npm ci
+        run: npm test
+        working-directory: ./aws-rds/frontend/front
 
   docker-build:
     needs: test
@@ -47,9 +53,16 @@ jobs:
         run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Build Docker image
+        if: ${{ contains(github.event.paths, 'aws-rds/backend') }}
         run: |
           docker build --tag henriquelr/dves_api:latest aws-rds/backend/
           docker build --tag henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/backend/
+
+      - name: Build Docker image
+        if: ${{ contains(github.event.paths, 'aws-rds/frontend') }}
+        run: |
+          docker build --tag henriquelr/dves_api:latest aws-rds/frontend/
+          docker build --tag henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/frontend/
 
       # - name: Push Docker image
       #   run: |
