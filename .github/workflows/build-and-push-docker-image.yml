@@ -78,8 +78,8 @@ jobs:
       - name: Build Docker image
         if: steps.filter.outputs.path2 == 'true'
         run: |
-          docker build --tag henriquelr/dves_api:latest aws-rds/frontend/
-          docker build --tag henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/frontend/
+          docker build --tag henriquelr/meu-site-nginx:latest aws-rds/frontend/
+          docker build --tag henriquelr/meu-site-nginx:${{ env.SHORT_SHA }} aws-rds/frontend/
 
       # - name: Push Docker image
       #   run: |
