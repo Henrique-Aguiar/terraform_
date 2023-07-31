@@ -15,23 +15,31 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            path1:  
+              - 'aws-rds/backend/**'
+            path2:
+              - 'aws-rds/frontend/**'
 
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
 
-      - name: path
-        run: echo "${GITHUB_PATH}"
       # Check if backend directory was modified
       - name: Install dependencies and run test
-        if: ${{ contains(github.event.paths, 'aws-rds/backend') }}
+        # if: ${{ contains(github.event.paths, 'aws-rds/backend') }}]
+        if: steps.filter.outputs.path1 == 'true'
         run: npm ci && npm test
         working-directory: ./aws-rds/backend
       
       # Check if frontend directory was modified
       - name: Install dependencies and run test
-        if: ${{ contains(github.event.paths, 'aws-rds/frontend') }}
+        # if: ${{ contains(github.event.paths, 'aws-rds/frontend') }}
+        if: steps.filter.outputs.path2 == 'true'
         run: npm ci && npm test
         working-directory: ./aws-rds/frontend/front
 

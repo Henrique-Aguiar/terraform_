@@ -18,4 +18,3 @@ FROM nginx
 
 COPY --from=buildStage /app/dist /usr/share/nginx/html/
 
-
