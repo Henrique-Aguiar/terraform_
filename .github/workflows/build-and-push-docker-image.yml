@@ -61,13 +61,13 @@ jobs:
         run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Build Docker image
-        if: ${{ contains(github.event.paths, 'aws-rds/backend') }}
+        if: steps.filter.outputs.path1 == 'true'
         run: |
           docker build --tag henriquelr/dves_api:latest aws-rds/backend/
           docker build --tag henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/backend/
 
       - name: Build Docker image
-        if: ${{ contains(github.event.paths, 'aws-rds/frontend') }}
+        if: steps.filter.outputs.path2 == 'true'
         run: |
           docker build --tag henriquelr/dves_api:latest aws-rds/frontend/
           docker build --tag henriquelr/dves_api:${{ env.SHORT_SHA }} aws-rds/frontend/
