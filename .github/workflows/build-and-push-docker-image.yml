@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: '16.x'
 
+      - name: path
+        run: echo ${{github.event.paths}}
+
       # Check if backend directory was modified
       - name: Install dependencies and run test
         if: ${{ contains(github.event.paths, 'aws-rds/backend') }}
