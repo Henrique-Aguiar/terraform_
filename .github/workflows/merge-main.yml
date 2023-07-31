@@ -78,6 +78,13 @@ jobs:
           docker build --tag henriquelr/meu-site-nginx:${{ env.SHORT_SHA }} aws-rds/frontend/
 
       - name: Push Docker image
+        if: steps.filter.outputs.path1 == 'true'
         run: |
           docker push henriquelr/dves_api:latest
           docker push henriquelr/dves_api:${{ env.SHORT_SHA }}
+      
+      - name: Push Docker image
+        if: steps.filter.outputs.path2 == 'true'
+        run: |
+          docker push henriquelr/meu-site-nginx:latest
+          docker push henriquelr/meu-site-nginx:${{ env.SHORT_SHA }}
